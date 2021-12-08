@@ -1,3 +1,3 @@
-import './app.scss';
+import './app.scss'
 
-console.log("this is webpack study!");
+console.log("this is webpack study!")
