@@ -1,15 +1,14 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ESLintPlugin = require('eslint-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin')
 
-module.exports = {
+module.exports = ({outputFile, assetFile}) => ({
     mode:'development',
     devtool: false,
-    entry: path.join(__dirname, '/src','index.js'),
+    entry: {app: './src/index.js',sub: './src/sub.js'},
     output: {
-        path: path.join(__dirname, '/dist'),
-        filename: 'app.js'
+        path: path.resolve(__dirname, 'public'),
+        filename: `${outputFile}.js`
     },
     module: {
         rules: [
@@ -29,9 +28,9 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(jpg|png|jpe?g|gif|svg|woff2?|ttf|eot)$/,
+                test: /\.(png|jpe?g|gif|svg|woff2?|ttf|eot)$/,
                 generator: {
-                        filename: 'images/[name][ext][query]',
+                        filename: `images/${assetFile}[ext][query]`,
                 }, 
                 type: 'asset/resource'
             }
@@ -39,11 +38,7 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: '[name].css'
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-            inject: 'body'
+            filename: `${outputFile}.css`
         }),
         new ESLintPlugin({
             extensions: ['.js'],
@@ -51,4 +46,4 @@ module.exports = {
             fix: true
         })
     ]
-}
+})
