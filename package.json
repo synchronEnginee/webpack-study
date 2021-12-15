@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "cleanup": "npx rimraf ./public",
-    "dev": "npm run cleanup && npx webpack --config ./webpack.dev.js",
+    "dev": "npm run webpack:dev && npm run webpack:server",
+    "webpack:server": "webpack serve --config ./webpack.dev.js",
+    "webpack:dev": "npm run cleanup && npx webpack --config ./webpack.dev.js",
     "build": "npm run cleanup && npx webpack --config ./webpack.prod.js"
   },
   "devDependencies": {
@@ -28,6 +30,7 @@
     "terser-webpack-plugin": "^5.2.5",
     "webpack": "^5.64.4",
     "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.6.0",
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {

@@ -1,6 +1,7 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = ({outputFile, assetFile}) => ({
     mode:'development',
@@ -44,6 +45,10 @@ module.exports = ({outputFile, assetFile}) => ({
             extensions: ['.js'],
             exclude: 'node_modules',
             fix: true
+        }),
+        new webpack.ProvidePlugin({
+            jQuery: 'jquery',
+            $: 'jquery'
         })
     ]
 })
