@@ -6,7 +6,7 @@ const webpack = require('webpack')
 module.exports = ({outputFile, assetFile}) => ({
     mode:'development',
     devtool: false,
-    entry: {app: './src/index.js',sub: './src/sub.js'},
+    entry: {app: './src/js/index.js',sub: './src/js/sub.js'},
     output: {
         path: path.resolve(__dirname, 'public'),
         filename: `${outputFile}.js`
@@ -48,7 +48,40 @@ module.exports = ({outputFile, assetFile}) => ({
         }),
         new webpack.ProvidePlugin({
             jQuery: 'jquery',
-            $: 'jquery'
+            $: 'jquery',
+            utils: [path.resolve(__dirname, 'src/js/utils'), 'default']
         })
-    ]
+    ],
+    optimization: {
+        splitChunks: {
+          chunks: 'all',
+          minSize: 0,
+          cacheGroups: {
+            defaultVendors: {
+              name: "vendors",
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10,
+              reuseExistingChunk: true,
+            },
+            default: {
+              minChunks: 2,
+              priority: -5,
+              reuseExistingChunk: true,
+            },
+            utils: {
+                name: 'utils',
+                test: /src[\\/]js[\\/]utils[\\/]/,
+            }
+          },
+        },
+        
+    },
+    resolve: {
+        alias: {
+            scss: path.resolve(__dirname, 'src/scss'),
+            imgs: path.resolve(__dirname, 'src/images')
+        },
+        extensions: ['.js', 'scss'],
+        modules: [path.resolve(__dirname, 'src'), 'node_modules']
+    }
 })
