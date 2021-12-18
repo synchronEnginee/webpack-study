@@ -71,10 +71,10 @@ module.exports = ({outputFile, assetFile}) => ({
             utils: {
                 name: 'utils',
                 test: /src[\\/]js[\\/]utils[\\/]/,
-            }
-          },
+                chunks: 'async'
+            },
         },
-        
+    }   
     },
     resolve: {
         alias: {

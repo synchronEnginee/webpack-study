@@ -1,4 +1,8 @@
 import 'scss/app.scss'
+setTimeout(() => {
+    import("js/sub")
+},2000)
+
 import utils from 'js/utils'
 
 const asyncFn = () =>  new Promise((resolve) => {
