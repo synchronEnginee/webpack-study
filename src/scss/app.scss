@@ -8,3 +8,10 @@ h1 {
         color: red;
     }
 }
+
+.bg {
+    background-image:  url('~imgs/background.jpg');
+    background-size: cover;
+    width: 100px; 
+    height: 100px;
+}
